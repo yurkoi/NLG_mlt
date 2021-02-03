@@ -4,10 +4,9 @@ from utils import gen_text
 app = Flask(__name__, template_folder="template")
 
 
-# @app.route('/')
-@app.route('/textgen/', methods=['post', 'get'])
+@app.route('/', methods=['post', 'get'])
+@app.route('/index', methods=['post', 'get'])
 def login():
-    message = ''
     if request.method == 'POST':
         prefix = request.form.get('prefix')
         temperature = request.form.get('temperature')
@@ -17,12 +16,8 @@ def login():
         generated_text = gen_text(min_length=min_length, max_length=max_length,
                                   temperature=temperature, sentence_prefix=prefix)
 
-        if prefix == 'root':
-            message = generated_text
-        else:
-            message = generated_text
-
-    return render_template('index.html', message=message)
+        return render_template('index.html', message=generated_text)
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
