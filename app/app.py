@@ -6,7 +6,7 @@ app = Flask(__name__, template_folder="template")
 
 @app.route('/', methods=['post', 'get'])
 @app.route('/index', methods=['post', 'get'])
-def login():
+def textgen():
     if request.method == 'POST':
         prefix = request.form.get('prefix')
         temperature = request.form.get('temperature')
